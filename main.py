@@ -1,14 +1,17 @@
 from src.do_substitute import do_substitute, subs as subs_dict
 from src.detection import MatchList, detectslash
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import json
 import os
+from src.activities import activities
 
 bot = commands.Bot(command_prefix="$", help_command=None)
 
 @bot.event
 async def on_ready():
+    change_activity.start()
+    
     print("Bot successfully run")
 
 @bot.command()
@@ -42,6 +45,10 @@ async def ipa(ctx, *, text: str):
 @bot.command()
 async def subs(ctx):
     await ctx.reply(f"```json\n{json.dumps(subs_dict, ensure_ascii=False, indent=4)}```")
+
+@tasks.loop(seconds=15)
+async def change_activity():
+    await bot.change_presence(activity=random.choice(activities))
 
 if __name__ == '__main__':
     bot.run(os.environ.get("DISCORD_KEY")) # heroku env var
