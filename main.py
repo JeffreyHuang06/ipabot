@@ -5,6 +5,7 @@ from discord.ext import commands, tasks
 import json
 import os
 from src.activities import activities
+import random
 
 bot = commands.Bot(command_prefix="$", help_command=None)
 
