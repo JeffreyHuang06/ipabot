@@ -41,7 +41,7 @@ async def ipa(ctx, *, text: str):
     if matches is not []:
         substituted = do_substitute(text, matches)
 
-        await ctx.reply(substituted)
+        await ctx.reply(substituted, mention_author = False)
 
 @bot.command()
 async def subs(ctx):
