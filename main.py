@@ -45,7 +45,7 @@ async def ipa(ctx, *, text: str):
 
 @bot.command()
 async def subs(ctx):
-    await ctx.reply(f"```json\n{json.dumps(subs_dict, ensure_ascii=False, indent=4)}```")
+    await ctx.reply(f"```json\n{json.dumps(subs_dict, ensure_ascii=False, indent=4)}```", mention_author = False)
 
 @tasks.loop(seconds=15)
 async def change_activity():
